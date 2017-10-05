@@ -1,7 +1,8 @@
-global	print_string, print_integer		;externalize functions
+global	print_string, print_integer, print_lfcr	;externalize functions
 
 	SECTION .data
-	teprinten db 0		;de te printen string
+	teprinten	db 0		;de te printen string
+	crlf		db 0xa, 0xd	;een lf en een cr (zie ascii)
 	
 	SECTION .text
 
@@ -89,3 +90,25 @@ print_loop:
 	pop 	rdx
 	pop	rbx		;En de veranderde register terughalen
 	ret			;en terug naar de aanroepende funtie
+
+	
+	;; functie print een LF en een CR (gemaks functie)
+	;; er wordt geen input verwacht
+print_lfcr:
+	push	rax	    	;opslaan van de registers
+	push	rbx
+	push	rcx
+	push	rdx
+	
+	mov	eax, 0x4	;de functie voor schrijven naar een stream
+	mov	ebx, 0x1	;we schrijven naar std out
+	mov	ecx, crlf	;onze te schrijven string
+	mov	edx, 0x2	;en die is 2 bytes lang
+	int	0x80		;voer de syscall uit
+
+	pop	rdx
+	pop	rcx
+	pop	rbx
+	pop	rax		;terug zetten van de registers
+	
+	ret			;en weer terug
