@@ -1,4 +1,5 @@
 	extern	print_string		;externe functie om een string te schrijven
+	extern	print_integer		;externe functie voor het printen van integers
 	
 SECTION .data
 	msg     db      'Rekentuig!', 0xa,0x0 ;welkomst string + een LF
@@ -30,6 +31,7 @@ loopje:
 	cmp	ecx, 10		;Is rcx al gelijk aan n
 	jb	loopje
 
+	call	print_integer	;printen maar
 	
 einde:	
 	mov	eax, 1		;syscall voor exit
