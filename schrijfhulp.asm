@@ -2,7 +2,7 @@ global	print_string, print_integer, print_crlf	;externalize functions
 
 	SECTION .data
 	teprinten	db 0		;de te printen string
-	crlf		db 0xa, 0xd	;een lf en een cr (zie ascii)
+	crlf		db 10,13	;een lf en een cr (zie ascii)
 	
 	SECTION .text
 
