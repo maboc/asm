@@ -1,4 +1,4 @@
-global	print_string, print_integer, print_lfcr	;externalize functions
+global	print_string, print_integer, print_crlf	;externalize functions
 
 	SECTION .data
 	teprinten	db 0		;de te printen string
@@ -94,7 +94,7 @@ print_loop:
 	
 	;; functie print een LF en een CR (gemaks functie)
 	;; er wordt geen input verwacht
-print_lfcr:
+print_crlf:
 	push	rax	    	;opslaan van de registers
 	push	rbx
 	push	rcx
