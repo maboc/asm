@@ -8,23 +8,23 @@ global  _start			;defineer het entrypoint
  
 _start:
  
-	mov     rax, 4		;syscall 4 : write naar stream
-	mov	rbx, 1		;de stream is standard out
-	mov     rcx, msg 	;adres van de string
-	mov	rdx, l		;lengte van de te schrijven string
+	mov     eax, 4		;syscall 4 : write naar stream
+	mov	ebx, 1		;de stream is standard out
+	mov     ecx, msg 	;adres van de string
+	mov	edx, l		;lengte van de te schrijven string
 	int 	0x80		;voer de syscall uit
 
-	xor 	rcx, rcx	;initialiseer de teller
+	mov	eax, 1		;initialiseer de te vermenigvuldigen waarde
+	xor 	ecx, ecx	;initialiseer de teller
 loopje:
-	inc	rcx	   ;de teller 1 ophogen
-	mov	rax, 1		;initialiseer de te vermenigvuldigen waarde
+	inc	ecx	   ;de teller 1 ophogen
 
-	mul	rcx		;rdx:rax <= rax*rcx
+	mul	ecx		;rdx:rax <= rax*rcx
 
-	cmp	rcx, n		;Is rcx al gelijk aan n
+	cmp	ecx, 10		;Is rcx al gelijk aan n
 	jb	loopje
 
 	
 einde:	
-	mov	rax, 1		;syscall voor exit
+	mov	eax, 1		;syscall voor exit
 	int	0x80		;roep de syscall aan
