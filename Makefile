@@ -6,4 +6,5 @@ rekentuig.o : rekentuig.asm
 
 clean :
 	rm *.o
-	rm *.~
+	rm *.*~
+	rm *~
