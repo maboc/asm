@@ -1,5 +1,7 @@
+	extern	print_string		;externe functie om een string te schrijven
+	
 SECTION .data
-	msg     db      'Rekentuig!', 0xa ;welkomst string + een LF
+	msg     db      'Rekentuig!', 0xa,0x0 ;welkomst string + een LF
 	l	equ	$-msg	     ;	lengte van de string
 	n	db	10	     ;Hier willen we de faculteit van uitrekenen
  
@@ -14,6 +16,10 @@ _start:
 	mov	edx, l		;lengte van de te schrijven string
 	int 	0x80		;voer de syscall uit
 
+	;; nu voor de fun nogmaals printen middels de externd funtie
+	mov	eax, msg   ;adres van de string
+	call	print_string
+	
 	mov	eax, 1		;initialiseer de te vermenigvuldigen waarde
 	xor 	ecx, ecx	;initialiseer de teller
 loopje:
