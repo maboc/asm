@@ -2,7 +2,7 @@ global	print_string, print_integer, print_crlf	;externalize functions
 
 	SECTION .data
 	teprinten	db 0		;de te printen string
-	crlf		db 10,13	;een lf en een cr (zie ascii)
+	crlf		db 10, 13	;een lf en een cr (zie ascii)
 	
 	SECTION .text
 
@@ -75,9 +75,9 @@ print_loop:
 	mov	ebx, 0x1	;schrijven naar de std. out
 	pop	rcx		;haal een cijfer van de stack
 	add	ecx, 0x30	;0x30 erbij om er een leesbaar cijfer van te maken (zie een ascii tabel)
-	mov	[teprinten], ecx
-	mov	ecx, teprinten
-	mov	edx,1
+	mov	[teprinten], ecx ;De waarde van crlf wordt de huidige waarde van ecx
+	mov	ecx, teprinten	 ;ecx krijgt het adres van teprinten
+	mov	edx,1		 ;lengte van teprinten is 1
 	int	0x80		;voer de syscall uit
 
 	dec	esi		;teller eentje minder
