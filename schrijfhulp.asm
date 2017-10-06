@@ -5,8 +5,7 @@ global	print_string, print_integer, print_crlf	;externalize functions
 	crlf		db 10, 13	;een lf en een cr (zie ascii)
 	
 	SECTION .text
-
-	
+	;; ---------------------------------------------------------------------------
 	;; telt de lengte van een zero-terminated string
 	;; Ik verwacht het adres van de string in eax
 	;; Bij terugkeer staat in edx de lengte van de string
@@ -25,6 +24,7 @@ terug:				;we kunnen ons herstellen en terug naar de aanroepende functie. EDX is
 	
 	ret			;terug naar de aanroepende functie
 
+	;; ---------------------------------------------------------------------------
 	;; printing zero-terminated strings naar std out
 	;; ik verwacht het adres van een zero-terminated string in eax
 print_string:
@@ -47,6 +47,7 @@ print_string:
 	
 	ret			;en terug naar de aanroeper
 
+	;; ---------------------------------------------------------------------------
 	;; Print een integer
 	;; de te printen waarde wordt in eax verwacht
 print_integer:
@@ -91,7 +92,7 @@ print_loop:
 	pop	rbx		;En de veranderde register terughalen
 	ret			;en terug naar de aanroepende funtie
 
-	
+	;; ---------------------------------------------------------------------------
 	;; functie print een LF en een CR (gemaks functie)
 	;; er wordt geen input verwacht
 print_crlf:
@@ -100,10 +101,10 @@ print_crlf:
 	push	rcx
 	push	rdx
 	
-	mov	eax, 0x4	;de functie voor schrijven naar een stream
-	mov	ebx, 0x1	;we schrijven naar std out
-	mov	ecx, crlf	;onze te schrijven string
-	mov	edx, 0x2	;en die is 2 bytes lang
+	mov	rax, 0x4	;de functie voor schrijven naar een stream
+	mov	rbx, 0x1	;we schrijven naar std out
+	mov	rcx, crlf	;onze te schrijven string
+	mov	rdx, 0x2	;en die is 2 bytes lang
 	int	0x80		;voer de syscall uit
 
 	pop	rdx
