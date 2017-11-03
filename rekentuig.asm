@@ -18,7 +18,7 @@ _start:
 	mov	edx, l		;lengte van de te schrijven string
 	int 	0x80		;voer de syscall uit
 
-	;; nu voor de fun nogmaals printen middels de externd funtie
+	;; nu voor de fun nogmaals printen middels de externe funtie
 	mov	eax, msg   ;adres van de string
 	call	print_string
 	
