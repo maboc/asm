@@ -20,7 +20,7 @@ teller:
 	jmp	teller		;en nog een rondje
 	
 terug:				;we kunnen ons herstellen en terug naar de aanroepende functie. EDX is nu gevuld met de lengte van de string
-	pop	rax		;en rx weer terug halen
+	pop	rax		;en rax weer terug halen
 	
 	ret			;terug naar de aanroepende functie
 
