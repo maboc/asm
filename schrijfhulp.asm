@@ -1,10 +1,10 @@
 global	print_string, print_integer, print_crlf	;externalize functions
 
-	SECTION .data
+SECTION .data
 	teprinten	db 0		;de te printen string
 	crlf		db 10, 13	;een lf en een cr (zie ascii)
 	
-	SECTION .text
+SECTION .text
 	;; ---------------------------------------------------------------------------
 	;; telt de lengte van een zero-terminated string
 	;; Ik verwacht het adres van de string in eax
