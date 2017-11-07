@@ -1,10 +1,6 @@
 global	print_string, print_integer, print_crlf	;externalize functions
 
-	SECTION .data
-	teprinten	db 0		;de te printen string
-	crlf		db 10, 13	;een lf en een cr (zie ascii)
-	
-	SECTION .text
+SECTION .text
 	;; ---------------------------------------------------------------------------
 	;; telt de lengte van een zero-terminated string
 	;; Ik verwacht het adres van de string in eax
@@ -97,19 +93,27 @@ print_loop:
 	;; er wordt geen input verwacht
 print_crlf:
 	push	rax	    	;opslaan van de registers
-	push	rbx
-	push	rcx
-	push	rdx
-	
-	mov	rax, 0x4	;de functie voor schrijven naar een stream
-	mov	rbx, 0x1	;we schrijven naar std out
-	mov	rcx, crlf	;onze te schrijven string
-	mov	rdx, 0x2	;en die is 2 bytes lang
-	int	0x80		;voer de syscall uit
+	push	rdi
 
-	pop	rdx
-	pop	rcx
-	pop	rbx
+	mov	eax, crlf	;lets print a cr and a lf
+	;;  mov	di, crlf	adres van crlf in es:di
+	lea 	eax, [crlf]
+	mov	edi, eax
+	mov	al, 0xa		;lf in al
+	stosb			;opslaan in crlf
+	mov	al, 0xd		;cr in al
+	stosb			;opslaan in crlf
+
+	mov	rax, crlf	;en nog maar eens het adres van de stirng in rax
+	call 	print_string	;do it...print
+
+	pop	rdi
 	pop	rax		;terug zetten van de registers
 	
 	ret			;en weer terug
+
+
+SECTION .data
+	teprinten	db 0		;de te printen string
+	crlf		db 10, 13,0	;een lf en een cr (zie ascii)
+	
